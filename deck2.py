@@ -153,7 +153,7 @@ class Engine(object):
     ace_start = [("A","S"),("A","C")]
     a_player = Player()
     a_dealer = Player()
-    a_player.mainhand.hand = ace_start
+    #a_player.mainhand.hand = ace_start #if i want to check aces work for splitting and soft values
     def __init__(self):
         pass
 
@@ -161,18 +161,17 @@ class Engine(object):
         Engine.a_player.main_deck.shuffle()
         Engine.a_player.mainhand.makebet()
         Engine.a_dealer.mainhand.hit()
-        #Engine.a_player.mainhand.hit()
-        #Engine.a_player.mainhand.hit()
+        Engine.a_player.mainhand.hit()
+        Engine.a_player.mainhand.hit()
         Engine.a_player.play(Engine.a_player.mainhand)
         Engine.a_dealer.mainhand.dealer()
         for x in Engine.a_player.handlist:
             Engine.a_player.win_check(x,Engine.a_dealer)
             x.return_cards(Engine.a_player.main_deck)
+        Engine.a_player.handlist = []
         Engine.a_dealer.mainhand.return_cards(Engine.a_player.main_deck)
 
 a_game = Engine()
+a_game.play() #can repeat as many times as you want to play more hands!
 a_game.play()
-
-"""things to do
-return the cards to the Deck
-clear the handlist"""
+a_game.play()
